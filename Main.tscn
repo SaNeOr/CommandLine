@@ -1,0 +1,88 @@
+[gd_scene load_steps=2 format=3 uid="uid://c38oc003e8khg"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_a8pqx"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a8pqx")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ToolBar" type="Panel" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/ToolBar"]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Clear" type="Button" parent="HBoxContainer/VBoxContainer/ToolBar/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+text = "Clear"
+alignment = 2
+
+[node name="FilterMessage" type="LineEdit" parent="HBoxContainer/VBoxContainer/ToolBar/HBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_direction = 2
+layout_mode = 2
+placeholder_text = "FilterMessage"
+clear_button_enabled = true
+
+[node name="LogPanel" type="Panel" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LogText" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 1
+text = "123
+123
+123
+123
+123
+213
+12
+3
+123
+"
+scroll_following = true
+threaded = true
+selection_enabled = true
+
+[node name="CommandInput" type="LineEdit" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = ">"
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ToolBar/HBoxContainer/Clear" to="." method="_on_clear_pressed"]
+[connection signal="text_changed" from="HBoxContainer/VBoxContainer/ToolBar/HBoxContainer/FilterMessage" to="." method="_on_filter_message_text_changed"]
+[connection signal="text_changed" from="HBoxContainer/VBoxContainer/CommandInput" to="." method="_on_command_input_text_changed"]
+[connection signal="text_submitted" from="HBoxContainer/VBoxContainer/CommandInput" to="." method="_on_command_input_text_submitted"]
